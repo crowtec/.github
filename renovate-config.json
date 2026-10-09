@@ -1,0 +1,38 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":dependencyDashboardApproval",
+    "group:monorepos",
+    "group:recommended"
+  ],
+  "semanticCommits": "enabled",
+  "timezone": "Europe/Madrid",
+  "schedule": ["before 9am on monday"],
+  "minimumReleaseAge": "7 days",
+  "prConcurrentLimit": 3,
+  "prHourlyLimit": 2,
+  "automerge": false,
+  "packageRules": [
+    {
+      "description": "Non-major dev dependencies together, in one PR",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "dev dependencies (non-major)"
+    },
+    {
+      "description": "GitHub Actions together, pinned by digest",
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions",
+      "pinDigests": true
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"],
+    "schedule": ["at any time"],
+    "minimumReleaseAge": null
+  },
+  "osvVulnerabilityAlerts": true
+}
